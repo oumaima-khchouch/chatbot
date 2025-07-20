@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 import spacy
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -12,7 +13,15 @@ from analyse import (
 from connexion import get_connection
 
 # Charger le modèle spaCy français
-nlp = spacy.load("fr_core_news_sm")
+
+try:
+    # Essaie de charger le modèle
+    nlp = spacy.load("fr_core_news_sm")
+except OSError:
+    # S'il n'est pas trouvé, essaie de le télécharger et charger
+    from spacy.cli import download
+    download("fr_core_news_sm")
+    nlp = spacy.load("fr_core_news_sm")
 
 # -------------------------------
 # Test de la connexion à la base
