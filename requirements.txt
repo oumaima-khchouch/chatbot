@@ -2,3 +2,4 @@ streamlit
 spacy
 pandas
 matplotlib
+mysql-connector-python
